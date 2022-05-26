@@ -39,8 +39,9 @@ jobs:
       run: |
         mkdir ${HOME}/.kube
         echo ${{ github.event.inputs.environment }}
-        if: ${{ github.event.inputs.environment == 'Dev' }}
-        echo ${{ github.event.inputs.environment }}
+        if: |
+          github.event.inputs.environment == Dev
+          echo ${{ github.event.inputs.environment }}
 #         echo ${{ secrets.KUBE_CONFIG_DEV }} | base64 --decode > {HOME}/.kube/config
 #         if: ${{ github.event.inputs.environment == 'Qa' }}
 #         echo ${{ secrets.KUBE_CONFIG_QA }} | base64 --decode > {HOME}/.kube/config
