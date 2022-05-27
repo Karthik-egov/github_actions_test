@@ -35,20 +35,20 @@ jobs:
 #       uses: azure/setup-kubectl@v2.0
 #       with:
 #         version: '1.22.0'
-    - name: create kube_config       
-      if: ${{ github.event.inputs.environment == 'Dev' }}
+    - if: ${{ github.event.inputs.environment == 'Dev' }}
+      name: create kube_config       
       run: |
-        mkdir ${HOME}/.kube
+        mkdir ${HOME}/.kube/config
         echo ${{ secrets.KUBE_CONFIG_DEV }} | base64 --decode > {HOME}/.kube/config
         cat ${HOME}/.kube/config
-    - name: create kube_config        
-      if: ${{ github.event.inputs.environment == 'Qa' }}
+    - if: ${{ github.event.inputs.environment == 'Qa' }}
+      name: create kube_config        
       run: |
         mkdir ${HOME}/.kube
         echo ${{ secrets.KUBE_CONFIG_QA }} | base64 --decode > {HOME}/.kube/config
         cat ${HOME}/.kube/config
-    - name: create kube_config       
-      if: ${{ github.event.inputs.environment == 'Uat' }}
+    - if: ${{ github.event.inputs.environment == 'Uat' }}
+      name: create kube_config       
       run: |
         mkdir ${HOME}/.kube
         echo ${{ secrets.KUBE_CONFIG_UAT }} | base64 --decode > {HOME}/.kube/config
