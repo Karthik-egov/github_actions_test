@@ -41,6 +41,7 @@ jobs:
         mkdir .kube
         echo ${{ secrets.KUBE_CONFIG_DEV }} | base64 --decode > .kube/config
         cat .kube/config
+        echo ${HOME}
     - if: ${{ github.event.inputs.environment == 'Qa' }}
       name: create kube_config 
       run: |
