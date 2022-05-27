@@ -38,28 +38,28 @@ jobs:
     - if: ${{ github.event.inputs.environment == 'Dev' }}
       name: create kube_config
       run: |
-        echo "Hi dev"
+        echo "Hi dev" > kar
+        cat kar
 #       run: |
 #         mkdir ${HOME}/.kube
-#         vi ${HOME}/.kube/config
 #         echo ${{ secrets.KUBE_CONFIG_DEV }} | base64 --decode > {HOME}/.kube/config
 #         cat ${HOME}/.kube/config
     - if: ${{ github.event.inputs.environment == 'Qa' }}
       name: create kube_config 
-      run: |
-        echo "Hi dev"
 #       run: |
-#         mkdir ${HOME}/.kube
-#         echo ${{ secrets.KUBE_CONFIG_QA }} | base64 --decode > {HOME}/.kube/config
-#         cat ${HOME}/.kube/config
+#         echo "Hi dev"
+      run: |
+        mkdir ${HOME}/.kube
+        echo ${{ secrets.KUBE_CONFIG_QA }} | base64 --decode > {HOME}/.kube/config
+        cat ${HOME}/.kube/config
     - if: ${{ github.event.inputs.environment == 'Uat' }}
       name: create kube_config       
-      run: |
-        echo "Hi dev"
 #       run: |
-#         mkdir ${HOME}/.kube
-#         echo ${{ secrets.KUBE_CONFIG_UAT }} | base64 --decode > {HOME}/.kube/config
-#         cat ${HOME}/.kube/config
+#         echo "Hi dev"
+      run: |
+        mkdir ${HOME}/.kube
+        echo ${{ secrets.KUBE_CONFIG_UAT }} | base64 --decode > {HOME}/.kube/config
+        cat ${HOME}/.kube/config
 #     - name: Setup aws-iam-authenticator
 #       uses: prepor/action-aws-iam-authenticator@master
 #     - name: deploy to cluster
