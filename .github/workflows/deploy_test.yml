@@ -38,21 +38,24 @@ jobs:
     - name: create kube_config
       run: |
         mkdir ${HOME}/.kube
-        echo ${{ github.event.inputs.environment }}
-        if: |
-          github.event.inputs.environment == Dev
-          echo ${{ github.event.inputs.environment }}
-#         echo ${{ secrets.KUBE_CONFIG_DEV }} | base64 --decode > {HOME}/.kube/config
-#         if: ${{ github.event.inputs.environment == 'Qa' }}
-#         echo ${{ secrets.KUBE_CONFIG_QA }} | base64 --decode > {HOME}/.kube/config
-#         if: ${{ github.event.inputs.environment == 'Uat' }}
-#         echo ${{ secrets.KUBE_CONFIG_UAT }} | base64 --decode > {HOME}/.kube/config
-#         cat ${HOME}/.kube/config
+    - name: create kube_config       
+      if: ${{ github.event.inputs.environment == 'Dev' }}
+      run: |
+        echo ${{ secrets.KUBE_CONFIG_DEV }} | base64 --decode > {HOME}/.kube/config
+    - name: create kube_config        
+      if: ${{ github.event.inputs.environment == 'Qa' }}
+      run: |
+        echo ${{ secrets.KUBE_CONFIG_QA }} | base64 --decode > {HOME}/.kube/config
+    - name: create kube_config       
+      if: ${{ github.event.inputs.environment == 'Uat' }}
+      run: |
+        echo ${{ secrets.KUBE_CONFIG_UAT }} | base64 --decode > {HOME}/.kube/config
+    - name: create kube_config  
+      run: |
+        cat ${HOME}/.kube/config
 #     - name: Setup aws-iam-authenticator
 #       uses: prepor/action-aws-iam-authenticator@master
 #     - name: deploy to cluster
 #       run: |
 #          cd /home/runner/work/DIGIT-Dev/DIGIT-Dev/DIGIT-DevOps/deploy-as-code/egov-deployer
 #          go run main.go deploy -c -e ${{github.event.inputs.environment}} ${{github.event.inputs.images}}
-
-  
