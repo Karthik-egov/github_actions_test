@@ -37,10 +37,11 @@ jobs:
 #         version: '1.22.0'
     - if: ${{ github.event.inputs.environment == 'Dev' }}
       name: create kube_config       
-#       run: |
-#         mkdir ${HOME}/.kube/config
-#         echo ${{ secrets.KUBE_CONFIG_DEV }} | base64 --decode > {HOME}/.kube/config
-#         cat ${HOME}/.kube/config
+      run: |
+        mkdir ${HOME}/.kube
+        touch ${HOME}/.kube/config
+        echo ${{ secrets.KUBE_CONFIG_DEV }} | base64 --decode > {HOME}/.kube/config
+        cat ${HOME}/.kube/config
     - if: ${{ github.event.inputs.environment == 'Qa' }}
       name: create kube_config        
 #       run: |
